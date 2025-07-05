@@ -1,0 +1,57 @@
+<div class="container my-5">
+  <div class="odontologos-header text-white p-4 rounded mb-4">
+    <h2>Registro de Odontólogos</h2>
+  </div>
+
+  <form [formGroup]="formulario" (ngSubmit)="guardarOdontologo()" class="mb-5 formulario-odontologos p-4 bg-light rounded shadow-sm">
+    <div class="row g-3">
+      <div class="col-md-6">
+        <label class="form-label">Nombre</label>
+        <input type="text" class="form-control" formControlName="nombre" required>
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">Especialidad</label>
+        <input type="text" class="form-control" formControlName="especialidad" required>
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">Teléfono</label>
+        <input type="tel" class="form-control" formControlName="telefono" required>
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">Correo</label>
+        <input type="email" class="form-control" formControlName="correo" required>
+      </div>
+    </div>
+
+    <div class="mt-4 d-flex gap-3">
+      <button type="submit" class="btn btn-primary" [disabled]="formulario.invalid">
+        {{ editando ? 'Actualizar' : 'Guardar' }}
+      </button>
+      <button type="button" class="btn btn-outline-danger" (click)="cancelar()">Cancelar</button>
+    </div>
+  </form>
+
+  <div class="odontologos-list">
+    <h3 class="mb-4">Odontólogos Registrados</h3>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+      <div class="col" *ngFor="let o of odontologos">
+        <div class="card shadow-sm h-100">
+          <div class="card-body">
+            <h5 class="card-title text-primary">{{ o.nombre }}</h5>
+            <p><strong>Especialidad:</strong> {{ o.especialidad }}</p>
+            <p><strong>Teléfono:</strong> {{ o.telefono }}</p>
+            <p><strong>Correo:</strong> {{ o.correo }}</p>
+          </div>
+          <div class="card-footer d-flex justify-content-end gap-2">
+            <button class="btn btn-sm btn-outline-primary" (click)="editar(o)">
+              <i class="bi bi-pencil"></i> Editar
+            </button>
+            <button class="btn btn-sm btn-outline-danger" (click)="eliminar(o.id!)">
+              <i class="bi bi-trash"></i> Eliminar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

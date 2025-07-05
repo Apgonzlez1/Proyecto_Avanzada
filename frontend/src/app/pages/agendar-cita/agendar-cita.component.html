@@ -1,0 +1,48 @@
+<div class="container my-5">
+  <div class="header-cita text-white p-4 rounded mb-4 text-center">
+    <h2>Gestión de Citas</h2>
+  </div>
+
+  <form [formGroup]="formulario" (ngSubmit)="guardarCita()" class="mb-5 p-4 bg-light rounded shadow-sm">
+    <div class="row g-3">
+      <div class="col-md-6">
+        <label class="form-label" for="fecha">Fecha</label>
+        <input id="fecha" type="date" class="form-control" formControlName="fecha" required>
+      </div>
+      <div class="col-md-6">
+        <label class="form-label" for="hora">Hora</label>
+        <input id="hora" type="time" class="form-control" formControlName="hora" required>
+      </div>
+      <div class="col-md-6">
+        <label class="form-label" for="paciente">ID Paciente</label>
+        <input id="paciente" type="text" class="form-control" formControlName="paciente" required>
+      </div>
+      <div class="col-md-6">
+        <label class="form-label" for="odontologo">ID Odontólogo</label>
+        <input id="odontologo" type="text" class="form-control" formControlName="odontologo" required>
+      </div>
+    </div>
+
+    <div class="mt-4 d-flex gap-3">
+      <button type="submit" class="btn btn-primary" [disabled]="formulario.invalid">Guardar</button>
+      <button type="button" class="btn btn-outline-danger" (click)="cancelar()">Cancelar</button>
+    </div>
+  </form>
+
+  <div class="citas-list">
+    <h3 class="mb-4">Citas Agendadas</h3>
+    <div class="row row-cols-1 row-cols-md-2 g-4">
+      <div class="col" *ngFor="let c of citas">
+        <div class="card shadow-sm h-100">
+          <div class="card-body">
+            <h5 class="card-title text-primary">Cita ID: {{ c.id }}</h5>
+            <p><strong>Fecha:</strong> {{ c.fecha | date:'fullDate' }}</p>
+            <p><strong>Hora:</strong> {{ c.fecha | date:'shortTime' }}</p>
+            <p><strong>ID Paciente:</strong> {{ c.id_paciente }}</p>
+            <p><strong>ID Odontólogo:</strong> {{ c.id_odontologo }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
